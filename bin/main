@@ -7,6 +7,7 @@ def welcome
         user_answer = gets.chomp
         if user_answer.match(/y/)
            instructions
+           game
         elsif user_answer.match(/n/)
             puts "bye"
             break
@@ -18,11 +19,25 @@ end
 
 def instructions
  puts "Instructions:\n 1)The game is played on a grid that's 3 squares by 3 squares.\n
- 2)Write a letter from A to B and a number from 1 to 3 to select the row and the column respectively that you want to play on.\n
+ 2)Write a letter from A to C and a number from 1 to 3 to select the row and the column respectively that you want to play on.\n
  3)Player 1 is X, player 2 is O.\n
  4)Once a player gets 3 marks in a row (up, down, across, or diagonally) is the winner.\n
  5)If all 9 squares are full, the game is over"
 
+end
+
+def game
+    puts "Write a letter from A to C and a number from 1 to 3"
+    payer_call = gets.chomp
+    if payer_call.include? "A"
+        puts "first row"
+    elsif payer_call.include? "B"
+        puts "second row"
+    elsif payer_call.include? "C"
+        puts "third row"
+    else 
+        puts "Please write a letter from A to C followed by a number from 1 to 3"
+    end
 end
 
 welcome
