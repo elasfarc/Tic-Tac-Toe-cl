@@ -1,21 +1,23 @@
 #!/usr/bin/env ruby
+first_row = ["_", "_", "_"]
+second_row = ["_", "_", "_"]
+third_row = ["_", "_", "_"]
+
+board = [first_row, second_row, third_row]
+
 
 def welcome
     puts "Welcome to the Tic Tac Toe game!"
-    while 1
-        puts "do you want to proceed? (y/n)"
-        user_answer = gets.chomp.downcase
-        if user_answer.match(/y/)
-           instructions
-           players_setting
-           game
-           board_matrix
-        elsif user_answer.match(/n/)
-            puts "bye"
-            break
-        else
-            puts "wrong answer"
-        end
+    puts "do you want to proceed? (y/n)"
+    user_answer = gets.chomp.downcase
+    if user_answer.match(/y/)
+        return true
+    elsif user_answer.match(/n/)
+        puts "bye"
+        return false
+    else
+        puts "wrong answer"
+        welcome
     end
 end
 
@@ -29,18 +31,14 @@ def instructions
 end
 
 def players_setting
-    player_one = ""
-    player_two = ""
-    #puts ""
-    puts "Okay master! May I have first player name?"
+    puts "Okay master! May I have first player's name?"
     user_answer = gets.chomp
     #some validation
     player_one  = user_answer
-    puts "cool! what about second player name?"
+    puts "cool! what about second player's name?"
     user_answer = gets.chomp
     #some validation
     player_two = user_answer
-
 end
 
 def game
@@ -85,25 +83,27 @@ def game
 end
 
 def board_matrix
-    first_row = ["_", "_", "_"]
-    second_row = ["_", "_", "_"]
-    third_row = ["_", "_", "_"]
-
-    board = [first_row, second_row, third_row]
-
     puts "#{board[0][0]} #{board[0][1]} #{board[0][2]}"
     puts "#{board[1][0]} #{board[1][1]} #{board[1][2]}"
     puts "#{board[2][0]} #{board[2][1]} #{board[2][2]}"
 end
 
+def round
+    if current_player = player_one
+       current_player = player_two
+    else
+        current_player = player_one
 
-
-
-
-
-
-welcome
-
+    game_finish
+end
+# game starts
 while 1 
+    #welcome
+    break unless welcome
+    instructions
+    players_setting
+    board_matrix
+    game
+    board_matrix
 end 
 
