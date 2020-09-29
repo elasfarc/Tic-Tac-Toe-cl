@@ -41,15 +41,12 @@ def players_setting
     player_two = user_answer
 end
 
-def game
+def user_choice(#depending_on_cur_player)      
     puts "Write a letter from A to C and a number from 1 to 3"
     payer_call = gets.chomp.upcase
     if payer_call.include? "A"
         if payer_call.include? "1"
-          board_matrix
-          #board[0][0] = "X"
-          #board(A,1)
-          board
+            
         elsif payer_call.include? "2"
             board[0][1] = "X"
         elsif payer_call.include? "3"
@@ -107,3 +104,10 @@ while 1
     board_matrix
 end 
 
+
+
+
+
+def alter_matrix(#return_from_user_choice_methoid, #some_other_vair_depde_on_cur_player )
+    board[][] = ()
+end
