@@ -46,7 +46,11 @@ def game
     puts "Write a letter from A to C and a number from 1 to 3"
     payer_call = gets.chomp.upcase
     if payer_call.include? "A"
-        puts "first row"
+        if payer_call.include? "1"
+        first_row[0] 
+        elsif payer_call.include? "2"
+        second_row
+        
     elsif payer_call.include? "B"
         puts "second row"
     elsif payer_call.include? "C"
@@ -56,4 +60,9 @@ def game
     end
 end
 
+def board 
+    first_row = ["_", "_", "_"]
+    second_row = ["_", "_", "_"]
+    third_row = ["_", "_", "_"]
+end
 welcome
