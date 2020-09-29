@@ -7,7 +7,8 @@ def welcome
         user_answer = gets.chomp
         if user_answer.match(/y/)
            instructions
-           game
+           players_setting
+           #game
         elsif user_answer.match(/n/)
             puts "bye"
             break
@@ -22,7 +23,22 @@ def instructions
  2)Write a letter from A to C and a number from 1 to 3 to select the row and the column respectively that you want to play on.\n
  3)Player 1 is X, player 2 is O.\n
  4)Once a player gets 3 marks in a row (up, down, across, or diagonally) is the winner.\n
- 5)If all 9 squares are full, the game is over"
+ 5)If all 9 squares are full, the game is over \n \n"
+ 
+end
+
+def players_setting
+    player_one = ""
+    player_two = ""
+    #puts ""
+    puts "Okay master! May I have first player name?"
+    user_answer = gets.chomp
+    #some validation
+    player_one  = user_answer
+    puts "cool! what about second player name?"
+    user_answer = gets.chomp
+    #some validation
+    player_two = user_answer
 
 end
 
