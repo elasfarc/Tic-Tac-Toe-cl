@@ -8,7 +8,8 @@ def welcome
         if user_answer.match(/y/)
            instructions
            players_setting
-           #game
+           game
+           board_matrix
         elsif user_answer.match(/n/)
             puts "bye"
             break
@@ -47,22 +48,62 @@ def game
     payer_call = gets.chomp.upcase
     if payer_call.include? "A"
         if payer_call.include? "1"
-        first_row[0] 
+          board_matrix
+          #board[0][0] = "X"
+          #board(A,1)
+          board
         elsif payer_call.include? "2"
-        second_row
-        
+            board[0][1] = "X"
+        elsif payer_call.include? "3"
+            board[0][2] = "X"
+        else
+            #wrong input
+        end
     elsif payer_call.include? "B"
-        puts "second row"
+        if payer_call.include? "1"
+            board[1][0] = "X"
+          elsif payer_call.include? "2"
+              board[1][1] = "X"
+          elsif payer_call.include? "3"
+              board[1][2] = "X"
+          else
+              #wrong input
+          end
     elsif payer_call.include? "C"
-        puts "third row"
+        if payer_call.include? "1"
+            board[2][0] = "X"
+          elsif payer_call.include? "2"
+              board[2][1] = "X"
+          elsif payer_call.include? "3"
+              board[2][2] = "X"
+          else
+              #wrong input
+          end
     else 
         puts "Please write a letter from A to C followed by a number from 1 to 3"
     end
 end
 
-def board 
+def board_matrix
     first_row = ["_", "_", "_"]
     second_row = ["_", "_", "_"]
     third_row = ["_", "_", "_"]
+
+    board = [first_row, second_row, third_row]
+
+    puts "#{board[0][0]} #{board[0][1]} #{board[0][2]}"
+    puts "#{board[1][0]} #{board[1][1]} #{board[1][2]}"
+    puts "#{board[2][0]} #{board[2][1]} #{board[2][2]}"
 end
+
+
+
+
+
+
+
 welcome
+
+while 1 
+end 
+
