@@ -4,7 +4,7 @@ def welcome
     puts "Welcome to the Tic Tac Toe game!"
     while 1
         puts "do you want to proceed? (y/n)"
-        user_answer = gets.chomp
+        user_answer = gets.chomp.downcase
         if user_answer.match(/y/)
            instructions
            players_setting
@@ -44,7 +44,7 @@ end
 
 def game
     puts "Write a letter from A to C and a number from 1 to 3"
-    payer_call = gets.chomp
+    payer_call = gets.chomp.upcase
     if payer_call.include? "A"
         puts "first row"
     elsif payer_call.include? "B"
