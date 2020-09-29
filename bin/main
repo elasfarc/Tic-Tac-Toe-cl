@@ -3,12 +3,10 @@
 def welcome
     puts "Welcome to the Tic Tac Toe game!"
     while 1
-        puts "do u want to proced? (y/n)"
+        puts "do you want to proceed? (y/n)"
         user_answer = gets.chomp
         if user_answer.match(/y/)
-           puts "lets go to the next method"
-           #instru
-           break 
+           instructions
         elsif user_answer.match(/n/)
             puts "bye"
             break
@@ -16,10 +14,15 @@ def welcome
             puts "wrong answer"
         end
     end
+end
 
+def instructions
+ puts "Instructions:\n 1)The game is played on a grid that's 3 squares by 3 squares.\n
+ 2)Write a letter from A to B and a number from 1 to 3 to select the row and the column respectively that you want to play on.\n
+ 3)Player 1 is X, player 2 is O.\n
+ 4)Once a player gets 3 marks in a row (up, down, across, or diagonally) is the winner.\n
+ 5)If all 9 squares are full, the game is over"
 
 end
 
-
 welcome
-puts "blahc dklbjdgksf"
