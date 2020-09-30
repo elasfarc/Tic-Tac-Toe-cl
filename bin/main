@@ -2,8 +2,7 @@
 # rubocop:disable all
 # frozen_string_literal: true
 letter = ''
-current_player = true
-
+current_player = true 
 def welcome
   puts 'Welcome to the Tic Tac Toe game!'
   puts 'do you want to proceed? (y/n)'
@@ -44,7 +43,7 @@ def user_choice(letter, board, p1, p2, current_player)
   whos_turn?(p1, p2, current_player)
   puts 'Write a letter from A to C and a number from 1 to 3'
   payer_call = gets.chomp.upcase
-  round(current_player, letter)
+  letter = symbol(current_player, letter)
   if payer_call.include? 'A'
     if payer_call.include? '1'
       board[0][0] = letter
@@ -70,7 +69,7 @@ def user_choice(letter, board, p1, p2, current_player)
       board[2][2] = letter
     end
   else
-    puts 'Please write a letter from A to C followed by a number from 1 to 3'
+    puts 'Wrong input master'
   end
   board_matrix(board)
 end
@@ -81,14 +80,21 @@ def board_matrix(board)
   puts "#{board[2][0]} #{board[2][1]} #{board[2][2]}"
 end
 
-def round(current_player, letter)
+def symbol(current_player, letter)
   if current_player
-    current_player = false
     letter = 'X'
   else
-    current_player = true
     letter = 'O'
   end
+  letter
+end
+
+def current_player(current_player)
+    if current_player
+      false
+    else
+      true
+    end
 end
 
 def whos_turn?(p1, p2, current_player)
@@ -111,14 +117,15 @@ board = [first_row, second_row, third_row]
 loop do
   break unless welcome
 
-  instructions
-  p1 = players_setting1
-  p2 = players_setting2(p1)
-  board_matrix(board)
-  puts "\n"
+   instructions
+   p1 = players_setting1
+   p2 = players_setting2(p1)
+   board_matrix(board)
+   puts "\n"
 
   loop do
     user_choice(letter, board, p1, p2, current_player)
+    current_player = current_player(current_player)
     # break unless game_finish
   end
 end
