@@ -102,16 +102,16 @@ def whos_turn?
   end
 end
 
-$first_row = %w[_ _ _]
-$second_row = %w[_ _ _]
-$third_row = %w[_ _ _]
+first_row = %w[_ _ _]
+second_row = %w[_ _ _]
+third_row = %w[_ _ _]
 
 $letter = ''
 $player_one = ''
 $player_two = ''
 $current_player = true
 
-$board = [$first_row, $second_row, $third_row]
+$board = [first_row, second_row, third_row]
 
 # game starts
 
