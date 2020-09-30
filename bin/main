@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 # rubocop:disable all
 # frozen_string_literal: true
+require '/home/karmaester/Tic-Tac-Toe-cl/lib/game_logic.rb'
+include GO
 letter = ''
 current_player = true 
 def welcome
@@ -39,39 +41,54 @@ def players_setting2(p1)
     user_answer
 end
 
-def user_choice(letter, board, p1, p2, current_player)
-  whos_turn?(p1, p2, current_player)
-  puts 'Write a letter from A to C and a number from 1 to 3'
-  payer_call = gets.chomp.upcase
-  letter = symbol(current_player, letter)
-  if payer_call.include? 'A'
-    if payer_call.include? '1'
-      board[0][0] == "_" ? board[0][0] = letter : invalid
-    elsif payer_call.include? '2' 
-      board[0][1] == "_" ? board[0][1] = letter : invalid
-    elsif payer_call.include? '3' 
-      board[0][2] == "_" ? board[0][2] = letter : invalid
-    end 
-  elsif payer_call.include? 'B' 
-    if payer_call.include? '1' 
-      board[1][0] == "_" ? board[1][0] = letter : invalid
-    elsif payer_call.include? '2' 
-      board[1][1] == "_" ? board[1][1] = letter : invalid
-    elsif payer_call.include? '3' 
-      board[1][2] == "_" ? board[1][2] = letter : invalid
-    end 
-  elsif payer_call.include? 'C' 
-    if payer_call.include? '1' 
-      board[2][0] == "_" ? board[2][0] = letter : invalid
-    elsif payer_call.include? '2' 
-      board[2][1] == "_" ? board[2][1] = letter : invalid
-    elsif payer_call.include? '3'
-      board[2][2] == "_" ? board[2][2] = letter : invalid
+def mapping(move)
+    move = move.to_sym
+    board_hash = {A1: [0,0],
+                  A2: [0,1],
+                  A3: [0,2],
+                  B1: [1,0],
+                  B2: [1,1],
+                  B3: [1,2],
+                  C1: [2,0],
+                  C2: [2,1],
+                  C3: [2,2]
+                } 
+                board_hash[move]
+end
+
+def not_taken?(move)
+    if move == "_"
+        return true
+    else
+        return false
     end
-  else
-    puts 'Wrong input master'
-  end
-  board_matrix(board)
+end
+
+def user_choice(board, current_player, p1, p2)
+    whos_turn?(p1, p2, current_player)
+    while true
+        puts 'Write a letter from A to C and a number from 1 to 3'
+        payer_call = gets.chomp.upcase
+        
+        letter= symbol(current_player, letter)
+
+        from_mapping = mapping(payer_call)
+
+        dummy_booleen = not_taken?(board[from_mapping[0]][from_mapping[1]])
+
+        if dummy_booleen
+
+        board[from_mapping[0]][from_mapping[1]] = letter
+        break
+        else
+        puts "already taken"  
+        end 
+    end
+    board_matrix(board)
+    board
+        
+    #board_local[returned_array_from_mapping[0]][returned_array_from_mapping[1]] = "X"
+    #return board_local[returned_array_from_mapping[0]][returned_array_from_mapping[1]]
 end
 
 def board_matrix(board)
@@ -124,7 +141,7 @@ loop do
    puts "\n"
 
   loop do
-    user_choice(letter, board, p1, p2, current_player)
+    user_choice(board, current_player, p1, p2)
     current_player = !current_player
     # break unless game_finish
   end
