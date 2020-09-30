@@ -46,25 +46,25 @@ def user_choice(letter, board, p1, p2, current_player)
   letter = symbol(current_player, letter)
   if payer_call.include? 'A'
     if payer_call.include? '1'
-      board[0][0] == "_" ? board[0][0] = letter: invalid
-    elsif payer_call.include? '2'
-      board[0][1] == "_" ? board[0][1] = letter: invalid
-    elsif payer_call.include? '3'
-      board[0][2] == "_" ? board[0][2] = letter: invalid
-    end
-  elsif payer_call.include? 'B'
-    if payer_call.include? '1'
-      board[1][0] == "_" ? board[1][0] = letter: invalid
-    elsif payer_call.include? '2'
-      board[1][1] == "_" ? board[1][1] = letter: invalid
-    elsif payer_call.include? '3'
-      board[1][2] == "_" ? board[1][2] = letter: invalid
-    end
-  elsif payer_call.include? 'C'
-    if payer_call.include? '1'
-      board[2][0] == "_" ? board[2][0] = letter: invalid
-    elsif payer_call.include? '2'
-      board[2][1] == "_" ? board[2][1] = letter: invalid
+      board[0][0] == "_" ? board[0][0] = letter : invalid
+    elsif payer_call.include? '2' 
+      board[0][1] == "_" ? board[0][1] = letter : invalid
+    elsif payer_call.include? '3' 
+      board[0][2] == "_" ? board[0][2] = letter : invalid
+    end 
+  elsif payer_call.include? 'B' 
+    if payer_call.include? '1' 
+      board[1][0] == "_" ? board[1][0] = letter : invalid
+    elsif payer_call.include? '2' 
+      board[1][1] == "_" ? board[1][1] = letter : invalid
+    elsif payer_call.include? '3' 
+      board[1][2] == "_" ? board[1][2] = letter : invalid
+    end 
+  elsif payer_call.include? 'C' 
+    if payer_call.include? '1' 
+      board[2][0] == "_" ? board[2][0] = letter : invalid
+    elsif payer_call.include? '2' 
+      board[2][1] == "_" ? board[2][1] = letter : invalid
     elsif payer_call.include? '3'
       board[2][2] == "_" ? board[2][2] = letter: invalid
     end
