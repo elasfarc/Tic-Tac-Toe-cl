@@ -8,7 +8,7 @@ $third_row = %w[_ _ _]
 $letter = ""
 $player_one = ""
 $player_two = "--"
-$current_player = $player_one
+$current_player = true
 
 $board = [$first_row, $second_row, $third_row]
 
@@ -87,12 +87,12 @@ end
 
 def round
     pp "ghghghghghghghghghghghghghghghghghghgh"
-  if $current_player = $player_one
-    $current_player = $player_two
+  if $current_player 
+    $current_player = false
     pp $current_player
     $letter = "O"
   else
-    $current_player = $player_one
+    $current_player = true
     $letter = "x"
   end
 end
