@@ -46,27 +46,27 @@ def user_choice(letter, board, p1, p2, current_player)
   letter = symbol(current_player, letter)
   if payer_call.include? 'A'
     if payer_call.include? '1'
-      board[0][0] = letter
+      board[0][0] == "_" ? board[0][0] = letter: invalid
     elsif payer_call.include? '2'
-      board[0][1] = letter
+      board[0][1] == "_" ? board[0][1] = letter: invalid
     elsif payer_call.include? '3'
-      board[0][2] = letter
+      board[0][2] == "_" ? board[0][2] = letter: invalid
     end
   elsif payer_call.include? 'B'
     if payer_call.include? '1'
-      board[1][0] = letter
+      board[1][0] == "_" ? board[1][0] = letter: invalid
     elsif payer_call.include? '2'
-      board[1][1] = letter
+      board[1][1] == "_" ? board[1][1] = letter: invalid
     elsif payer_call.include? '3'
-      board[1][2] = letter
+      board[1][2] == "_" ? board[1][2] = letter: invalid
     end
   elsif payer_call.include? 'C'
     if payer_call.include? '1'
-      board[2][0] = letter
+      board[2][0] == "_" ? board[2][0] = letter: invalid
     elsif payer_call.include? '2'
-      board[2][1] = letter
+      board[2][1] == "_" ? board[2][1] = letter: invalid
     elsif payer_call.include? '3'
-      board[2][2] = letter
+      board[2][2] == "_" ? board[2][2] = letter: invalid
     end
   else
     puts 'Wrong input master'
@@ -89,14 +89,6 @@ def symbol(current_player, letter)
   letter
 end
 
-def current_player(current_player)
-    if current_player
-      false
-    else
-      true
-    end
-end
-
 def whos_turn?(p1, p2, current_player)
   if current_player
     pp "okay #{p1} it's ur turn "
@@ -104,6 +96,14 @@ def whos_turn?(p1, p2, current_player)
   else
     pp "okay #{p2} it's ur turn "
   end
+end
+
+def invalid
+    puts "Not good, this position is already occupied"
+end
+
+def valid
+    puts "Nice move"
 end
 
 first_row = %w[_ _ _]
@@ -125,7 +125,7 @@ loop do
 
   loop do
     user_choice(letter, board, p1, p2, current_player)
-    current_player = current_player(current_player)
+    current_player = !current_player
     # break unless game_finish
   end
 end
