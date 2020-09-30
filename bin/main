@@ -66,7 +66,7 @@ def user_choice(letter, board, p1, p2, current_player)
     elsif payer_call.include? '2' 
       board[2][1] == "_" ? board[2][1] = letter : invalid
     elsif payer_call.include? '3'
-      board[2][2] == "_" ? board[2][2] = letter: invalid
+      board[2][2] == "_" ? board[2][2] = letter : invalid
     end
   else
     puts 'Wrong input master'
