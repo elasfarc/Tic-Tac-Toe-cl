@@ -33,11 +33,9 @@ def players_setting
   players_arry = []
   puts "Okay master! May I have first player's name?"
   user_answer = gets.chomp
-  # some validation
   players_arry[0] = user_answer
   puts "cool! #{players_arry[0]}, what about second player's name?"
   user_answer = gets.chomp
-  # some validation
   players_arry[1] = user_answer
   puts "cool! #{players_arry[1]}, let's start to play "
   players_arry
@@ -112,43 +110,20 @@ players = %w[player_1 player2]
 current_player = true
 
 # game starts
-
-# loop do
-#   break unless welcome
-
-#   instructions
-#   players_setting
-#   board_matrix
-#   puts "\n"
-
-#   loop do
-#     user_choice
-#     # break unless game_finish
-#   end
-# end
-
-# players = players_setting()
-# pp players
-
-# board_matrix(board)
-
 loop do
-  #   break unless welcome
+    break unless welcome
 
-  #   instructions
+   instructions
   players = players_setting
   board_matrix(board)
   puts "\n"
 
   loop do
-    # pp current_player
+
     whos_turn?(players, current_player)
     board = user_choice(board, current_player)
 
     current_player = !current_player
 
-    # pp current_player
-
-    #     # break unless game_finish
   end
 end
