@@ -34,8 +34,8 @@ end
 #   board_matrix(board)
 #   puts "\n"
 #   loop do
-###################
 #     whos_turn?(players, current_player)
+###################
 #     board = user_choice(board, current_player)
 #     # Break unless we have a winner
 #     current_player = !current_player
@@ -53,10 +53,12 @@ end
    puts "cool! #{p1.name}, what about second player's name?"
    p2 = Player.new(gets.chomp)
    puts "cool! #{p2.name}, let's start to play "
-   board1 = Board.new
-   board1.board_matrix
+   board = Board.new
+   board.p_board
    loop do
+     puts Player.whos_turn?  
 
+     #board1.round(Player.current_player == )
    end
   
  end
