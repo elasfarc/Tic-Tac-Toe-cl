@@ -1,6 +1,13 @@
 #!/usr/bin/env ruby
 require_relative '../lib/player.rb'
 require_relative '../lib/board.rb'
+
+outputs = {
+        ask_input:'Write a letter from A to C and a number from 1 to 3', 
+        wrong: 'wrong input', 
+        taken: 'already taken'
+    }
+
 def welcome
   puts 'Welcome to the Tic Tac Toe game!'
   puts 'do you want to proceed? (y/n)'
@@ -54,10 +61,18 @@ end
    p2 = Player.new(gets.chomp)
    puts "cool! #{p2.name}, let's start to play "
    board = Board.new
-   board.p_board
+   puts board.p_board
    loop do
-     puts Player.whos_turn?  
-
+     puts Player.whos_turn? 
+     puts outputs[:ask_input] 
+     input = (gets.chomp.upcase)
+     if board.user_choice(input, Player.current_player) == nil
+      puts outputs[:wrong]
+     elsif board.user_choice(input, Player.current_player) == "taken"
+      puts outputs[:taken]
+     else
+      p "else"
+     end
      #board1.round(Player.current_player == )
    end
   
