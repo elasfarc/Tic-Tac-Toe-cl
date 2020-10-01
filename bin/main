@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 # rubocop:disable Metrics/MethodLength
-# rubocop:disable Metrics/LineLength
 # rubocop:disable Metrics/AbcSize
 
 def welcome
@@ -53,13 +52,13 @@ def user_choice(board_local, current_player_local)
 
     letter_local_updated = round(current_player_local)
 
-    returned_array_from_mapping = mapping(payer_call)
+    mapping_array = mapping(payer_call)
 
-    dummy_booleen = not_taken?(board_local[returned_array_from_mapping[0]][returned_array_from_mapping[1]])
+    dummy_booleen = not_taken?(board_local[mapping_array[0]][mapping_array[1]])
 
     if dummy_booleen
 
-      board_local[returned_array_from_mapping[0]][returned_array_from_mapping[1]] = letter_local_updated
+      board_local[mapping_array[0]][mapping_array[1]] = letter_local_updated
       break
     else
       puts 'already taken'
@@ -101,15 +100,9 @@ end
 
 def mapping(move)
   move = move.to_sym
-  board_hash = { A1: [0, 0],
-                 A2: [0, 1],
-                 A3: [0, 2],
-                 B1: [1, 0],
-                 B2: [1, 1],
-                 B3: [1, 2],
-                 C1: [2, 0],
-                 C2: [2, 1],
-                 C3: [2, 2] }
+  board_hash = { A1: [0, 0], A2: [0, 1], A3: [0, 2],
+                 B1: [1, 0], B2: [1, 1], B3: [1, 2],
+                 C1: [2, 0], C2: [2, 1], C3: [2, 2] }
   board_hash[move]
 end
 
@@ -162,5 +155,4 @@ loop do
   end
 end
 # rubocop:enable Metrics/MethodLength
-# rubocop:enable Metrics/LineLength
 # rubocop:enable Metrics/AbcSize
