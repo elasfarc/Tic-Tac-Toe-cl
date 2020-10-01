@@ -1,8 +1,4 @@
 #!/usr/bin/env ruby
-# frozen_string_literal: true
-
-# rubocop:disable Metrics/MethodLength
-# rubocop:disable Metrics/AbcSize
 
 def welcome
   puts 'Welcome to the Tic Tac Toe game!'
@@ -154,5 +150,3 @@ loop do
     #     # break unless game_finish
   end
 end
-# rubocop:enable Metrics/MethodLength
-# rubocop:enable Metrics/AbcSize
