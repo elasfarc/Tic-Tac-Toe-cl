@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+require_relative '../lib/game_logic.rb'
+
+hi
 
 def welcome
   puts 'Welcome to the Tic Tac Toe game!'
@@ -111,18 +114,20 @@ players = %w[player_1 player2]
 current_player = true
 
 # game starts
-loop do
-  break unless welcome
+# loop do
+#   break unless welcome
 
-  instructions
-  players = players_setting
-  board_matrix(board)
-  puts "\n"
+#   instructions
+#   players = players_setting
+#   board_matrix(board)
+#   puts "\n"
 
-  loop do
-    whos_turn?(players, current_player)
-    board = user_choice(board, current_player)
+#   loop do
+#     whos_turn?(players, current_player)
+#     board = user_choice(board, current_player)
+#     # Break unless we have a winner
+#     current_player = !current_player
 
-    current_player = !current_player
-  end
-end
+#   end
+#   # Method: Play_again? Break if not
+# end
