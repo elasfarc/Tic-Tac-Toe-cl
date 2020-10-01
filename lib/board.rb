@@ -8,11 +8,16 @@ class Board
         @board = [first_row, second_row, third_row]
     end
 
-    # def board_matrix
-    #     puts "#{@board[0][0]} #{@board[0][1]} #{@board[0][2]}"
-    #     puts "#{@board[1][0]} #{@board[1][1]} #{@board[1][2]}"
-    #     puts "#{@board[2][0]} #{@board[2][1]} #{@board[2][2]}"
+     def print_board
+       
+       "#{@board[0][0]} #{@board[0][1]} #{@board[0][2]}\n" +
+       "#{@board[1][0]} #{@board[1][1]} #{@board[1][2]}\n" +
+       "#{@board[2][0]} #{@board[2][1]} #{@board[2][2]}"
         
-    # end
+        
+        
+     end
 end
 
+board1 = Board.new
+puts board1.print_board

@@ -1,5 +1,6 @@
 class Player
     @@players_arry = []
+    
     attr_accessor :name
 
     def initialize(n = "unknown_player")

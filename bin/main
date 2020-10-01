@@ -31,10 +31,10 @@ end
 #   break unless welcome
 #   instructions
 #   players = players_setting
-###################
 #   board_matrix(board)
 #   puts "\n"
 #   loop do
+###################
 #     whos_turn?(players, current_player)
 #     board = user_choice(board, current_player)
 #     # Break unless we have a winner
@@ -55,4 +55,8 @@ end
    puts "cool! #{p2.name}, let's start to play "
    board1 = Board.new
    board1.board_matrix
+   loop do
+
+   end
+  
  end
