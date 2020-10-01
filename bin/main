@@ -1,8 +1,4 @@
-#!/usr/bin/env ruby
-# rubocop:disable all
 # frozen_string_literal: true
-require '/home/karmaester/Tic-Tac-Toe-cl/lib/game_logic.rb'
-include GO
 letter = ''
 current_player = true 
 def welcome
