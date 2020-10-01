@@ -47,9 +47,12 @@ def user_choice(board_local, current_player_local)
     payer_call = gets.chomp.upcase
 
     letter_local_updated = round(current_player_local)
-
+    
     mapping_array = mapping(payer_call)
-
+     if mapping_array == nil
+      puts "wrong input \n"
+      next
+     end
     dummy_booleen = not_taken?(board_local[mapping_array[0]][mapping_array[1]])
 
     if dummy_booleen
