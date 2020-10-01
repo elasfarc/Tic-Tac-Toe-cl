@@ -1,6 +1,4 @@
-
 #!/usr/bin/env ruby
-
 
 def welcome
   puts 'Welcome to the Tic Tac Toe game!'
@@ -47,12 +45,12 @@ def user_choice(board_local, current_player_local)
     payer_call = gets.chomp.upcase
 
     letter_local_updated = round(current_player_local)
-    
+
     mapping_array = mapping(payer_call)
-     if mapping_array == nil
+    if mapping_array.nil?
       puts "wrong input \n"
       next
-     end
+    end
     dummy_booleen = not_taken?(board_local[mapping_array[0]][mapping_array[1]])
 
     if dummy_booleen
@@ -114,19 +112,17 @@ current_player = true
 
 # game starts
 loop do
-    break unless welcome
+  break unless welcome
 
-   instructions
+  instructions
   players = players_setting
   board_matrix(board)
   puts "\n"
 
   loop do
-
     whos_turn?(players, current_player)
     board = user_choice(board, current_player)
 
     current_player = !current_player
-
   end
 end
