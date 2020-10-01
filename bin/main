@@ -1,6 +1,8 @@
-# frozen_string_literal: true
+require_relative 'lib/game_logic.rb'
+
 letter = ''
 current_player = true 
+
 def welcome
   puts 'Welcome to the Tic Tac Toe game!'
   puts 'do you want to proceed? (y/n)'
