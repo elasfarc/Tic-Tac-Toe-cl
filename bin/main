@@ -52,7 +52,6 @@ while keep_going
   p2 = Player.new(gets.chomp)
   puts "cool! #{p2.name}, let's start to play "
   board = Board.new
-  puts board.p_board
   while game_on
 
     puts Player.whos_turn?
