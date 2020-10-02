@@ -7,10 +7,12 @@ outputs = {
   wrong: 'wrong input',
   taken: 'already taken',
   draw: 'it\'s a draw',
-  winner: 'Congratulations you are the winner!'
+  winner: 'Congratulations you are the winner!',
+  play_again: 'Do you want to keep playing? y/n'
 }
 input = ""
-
+game_on = true
+keep_going = true
 def welcome
   puts 'Welcome to the Tic Tac Toe game!'
   puts 'do you want to proceed? (y/n)'
@@ -39,10 +41,9 @@ def instructions
 end
 
 # game starts
-loop do ###### Bigloop
+while keep_going
   break unless welcome
 
-  game_on = true
   instructions
   puts "Okay master! May I have first player's name?"
   p1 = Player.new(gets.chomp)
@@ -79,5 +80,6 @@ loop do ###### Bigloop
     end
     Player.switch_player
   end
-  # Method: Play_again? Break if not
+  puts outputs[:play_again]
+  keep_going = Player.play_again?(gets.chomp.downcase)
 end
