@@ -64,15 +64,13 @@ end
    puts board.p_board
    loop do
      puts Player.whos_turn? 
-     puts outputs[:ask_input] 
-     input = (gets.chomp.upcase)
-     if board.user_choice(input, Player.current_player) == nil
-      puts outputs[:wrong]
-     elsif board.user_choice(input, Player.current_player) == "taken"
-      puts outputs[:taken]
-     else
-      p "else"
-     end
+     while true
+      puts outputs[:ask_input] 
+      input = gets.chomp
+      puts outputs[:wrong] if board.wrong_input?(input)
+      puts outputs[:taken] if board.already_taken?(input)
+        board.check_cell(input)
+    end
      #board1.round(Player.current_player == )
    end
   
