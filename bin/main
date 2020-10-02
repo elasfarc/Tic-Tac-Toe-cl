@@ -70,16 +70,17 @@ end
       #puts outputs[:wrong] if board.wrong_input?(input)
       #puts outputs[:taken] if board.already_taken?(input)
 
-      input_status = check_input(input)
+      input_status = board.check_input(input)
       #puts outputs[input_status.to_sym] unless input_status == "accepted"
       
       unless input_status == "accepted"
         puts outputs[input_status.to_sym]
         next
       end
-
-  
-     
+      board.modify(Player.current_player, input)
+      puts board.p_board
+      Player.switch_player
+     break
         #board.check_cell(input)
     end
      #board1.round(Player.current_player == )
