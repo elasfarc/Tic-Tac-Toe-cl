@@ -40,7 +40,7 @@ class Board
     mapping_array = mapping(input)
     # function
     @board[mapping_array[0]][mapping_array[1]] = letter
-end
+  end
 
   def round(current_player_local)
     letter = if current_player_local
@@ -61,11 +61,11 @@ end
   end
 
   def game_finish?(current_player, input)
-    return "winner" if winner?(current_player, input)
+    return 'winner' if winner?(current_player, input)
     return 'draw' if draw?
 
     false
- end
+  end
 
   def draw?
     flag = []
@@ -81,33 +81,30 @@ end
     letter = round(current_player)
     return true if horizontal_check(arr, letter)
     return true if vertical_check(arr, letter)
-    if  arr[0] == arr[1]  ||   ( arr[0] - arr[1] ).abs == 2 
-        return true if diagonal_check(arr, letter)
-      end
+
+    if arr[0] == arr[1] || (arr[0] - arr[1]).abs == 2
+      return true if diagonal_check(arr, letter)
+    end
 
     false
   end
 
   def horizontal_check(ary, letter)
-
-    ( @board[ary[0]][0] ==  letter) && 
-    ( @board[ary[0]][1] ==  letter) && 
-     (@board[ary[0]][2] ==  letter )  
-
+    (@board[ary[0]][0] == letter) &&
+      (@board[ary[0]][1] == letter) &&
+      (@board[ary[0]][2] == letter)
   end
 
   def vertical_check(ary, letter)
-    ( @board[0][ary[1]] ==  letter) && 
-    ( @board[1][ary[1]] ==  letter) && 
-     (@board[2][ary[1]] ==  letter )  
+    (@board[0][ary[1]] == letter) &&
+      (@board[1][ary[1]] == letter) &&
+      (@board[2][ary[1]] == letter)
   end
 
-    def diagonal_check(ary, letter)
-        
-          ( (@board[0][0]  ==  letter)	&&  (@board[1][1]  ==  letter) && (@board[2][2]  ==  letter) ) ||
-         ( (@board[0][2]  ==  letter)	&&  (@board[1][1]  ==  letter) && (@board[2][0]  ==  letter) )
-    end
-
+  def diagonal_check(_ary, letter)
+    ((@board[0][0] == letter) && (@board[1][1] == letter) && (@board[2][2] == letter)) ||
+      ((@board[0][2] == letter) && (@board[1][1] == letter) && (@board[2][0] == letter))
+  end
 end
 
 # board1 = Board.new

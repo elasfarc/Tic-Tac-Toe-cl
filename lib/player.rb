@@ -25,7 +25,7 @@ class Player
   end
 
   def self.play_again?(arg)
-    false if arg == "n"
-    arg == "y"
+    false if arg == 'n'
+    arg == 'y'
   end
 end
