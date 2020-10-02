@@ -60,7 +60,7 @@ end
     board_hash[move]
   end
 
-  def game_finish?
+  def game_finish?(current_player)
     # return "winner" if winner
     return 'draw' if draw?
 
@@ -74,6 +74,10 @@ end
     flag[2] = @board[2].none? { |cell| cell == '_' }
 
     flag.all? { |f| f == true }
+  end
+
+  def winner?
+
   end
 end
 
