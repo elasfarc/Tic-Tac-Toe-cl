@@ -37,22 +37,6 @@ def instructions
    5)If all 9 squares are full, the game is over \n \n"
 end
 
-# loop do
-#   break unless welcome
-#   instructions
-#   players = players_setting
-#   board_matrix(board)
-#   puts "\n"
-#   loop do
-#     whos_turn?(players, current_player)
-###################
-#     board = user_choice(board, current_player)
-#     # Break unless we have a winner
-#     current_player = !current_player
-#   end
-#   # Method: Play_again? Break if not
-# end
-
 # game starts
 loop do ###### Bigloop
   break unless welcome
@@ -85,7 +69,7 @@ loop do ###### Bigloop
       break
     end
 
-    game_status = board.game_finish?
+    game_status = board.game_finish?(current_player)
 
     if game_status
       puts outputs[game_status.to_sym]
@@ -93,4 +77,5 @@ loop do ###### Bigloop
     end
 
   end
+  # Method: Play_again? Break if not
 end
