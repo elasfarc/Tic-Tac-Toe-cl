@@ -8,7 +8,7 @@ class Player
         @@players_arry.push(@name)
     end
 
-    def switch_player
+    def self.switch_player
         @@current_player = !@@current_player
     end
 
@@ -22,26 +22,5 @@ class Player
         else
            "okay #{@@players_arry[1]} it's ur turn "
         end
-      end
-
-
+    end
 end
-
-
-
-# pp "enter ur name"
-   #p1 = Player.new(gets.chomp)
-   #pp p1.switch_player
-   #pp p1.whos_turn?
-   #pp Player.whos_turn?
-# pp "enter ur  2nd name"
-#   p2 = Player.new(gets.chomp)
-#   p2_name = p2.name
-
-#  #pp p1_name
-
-#  pp p1.print_players
-
-
-
- 

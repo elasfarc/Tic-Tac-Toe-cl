@@ -15,8 +15,14 @@ class Board
        "#{@board[2][0]} #{@board[2][1]} #{@board[2][2]}"
      end
 
-     def check_cell(input)
-
+     def check_input(input)
+      if wrong_input?(input)
+        "wrong"
+      elsif already_taken?(input)
+        "taken"
+      else
+        "accepted"
+      end
      end
 
      def wrong_input?(input)
@@ -29,6 +35,25 @@ class Board
      @board[ mapping_array[0]][ mapping_array[1] ] != '_'
         
     end
+
+    def modify(current_player, input)
+       letter = round(current_player)
+
+      mapping_array = mapping(input)
+      # function 
+   @board[mapping_array[0]][mapping_array[1]] = letter
+      
+  end
+
+  def round(current_player_local)
+    letter = if current_player_local
+  
+               'X'
+             else
+               'O'
+             end
+    letter
+  end
 
     def mapping(move)
         move = move.to_sym
