@@ -3,8 +3,8 @@ class Player
   @@current_player = true
   attr_accessor :name
 
-  def initialize(n = 'unknown_player')
-    @name = n
+  def initialize(name = 'unknown_player')
+    @name = name
     @@players_arry.push(@name)
   end
 

@@ -52,10 +52,10 @@ while keep_going
   puts "cool! #{p2.name}, let's start to play "
   board = Board.new
   puts board.p_board
-  while game_on ###### loop #2
+  while game_on
 
     puts Player.whos_turn?
-    loop do ###### loop #3
+    loop do
       puts outputs[:ask_input]
       input = gets.chomp.upcase
 
@@ -82,4 +82,5 @@ while keep_going
   end
   puts outputs[:play_again]
   keep_going = Player.play_again?(gets.chomp.downcase)
+
 end
