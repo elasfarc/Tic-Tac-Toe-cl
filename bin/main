@@ -3,10 +3,12 @@ require_relative '../lib/player.rb'
 require_relative '../lib/board.rb'
 
 outputs = {
-        ask_input:'Write a letter from A to C and a number from 1 to 3', 
-        wrong: 'wrong input', 
-        taken: 'already taken'
-    }
+  ask_input: 'Write a letter from A to C and a number from 1 to 3',
+  wrong: 'wrong input',
+  taken: 'already taken',
+  draw: 'it\'s a draw',
+  winner: 'Congratulations you are the winner!'
+}
 
 def welcome
   puts 'Welcome to the Tic Tac Toe game!'
@@ -22,6 +24,7 @@ def welcome
     welcome
   end
 end
+
 def instructions
   puts "Instructions:\n
    1)The game is played on a grid that's 3 squares by 3 squares.\n
@@ -50,40 +53,44 @@ end
 #   # Method: Play_again? Break if not
 # end
 
-
 # game starts
- loop do
-   break unless welcome
-   instructions
-   puts "Okay master! May I have first player's name?"
-   p1 = Player.new(gets.chomp)
-   puts "cool! #{p1.name}, what about second player's name?"
-   p2 = Player.new(gets.chomp)
-   puts "cool! #{p2.name}, let's start to play "
-   board = Board.new
-   puts board.p_board
-   loop do
-     puts Player.whos_turn? 
-     while true
-      puts outputs[:ask_input] 
-      input = gets.chomp.upcase
-      #puts outputs[:wrong] if board.wrong_input?(input)
-      #puts outputs[:taken] if board.already_taken?(input)
+loop do ###### Bigloop
+  break unless welcome
 
+  game_on = true
+  instructions
+  puts "Okay master! May I have first player's name?"
+  p1 = Player.new(gets.chomp)
+  puts "cool! #{p1.name}, what about second player's name?"
+  p2 = Player.new(gets.chomp)
+  puts "cool! #{p2.name}, let's start to play "
+  board = Board.new
+  puts board.p_board
+  while game_on ###### loop #2
+    puts Player.whos_turn?
+
+    loop do ###### loop #3
+      puts outputs[:ask_input]
+      input = gets.chomp.upcase
       input_status = board.check_input(input)
-      #puts outputs[input_status.to_sym] unless input_status == "accepted"
-      
-      unless input_status == "accepted"
+
+      unless input_status == 'accepted'
         puts outputs[input_status.to_sym]
         next
       end
+
       board.modify(Player.current_player, input)
       puts board.p_board
       Player.switch_player
-     break
-        #board.check_cell(input)
+      break
     end
-     #board1.round(Player.current_player == )
-   end
-  
- end
+
+    game_status = board.game_finish?
+
+    if game_status
+      puts outputs[game_status.to_sym]
+      game_on = !game_on
+    end
+
+  end
+end

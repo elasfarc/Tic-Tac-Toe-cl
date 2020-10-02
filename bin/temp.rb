@@ -42,12 +42,12 @@ def players_setting
   players_arry
 end
 
-def user_choice(board_local, current_player_local)
+def user_choice(board_local, _current_player_local)
   loop do
     puts 'Write a letter from A to C and a number from 1 to 3'
     payer_call = gets.chomp.upcase
 
-    #letter_local_updated = round(current_player_local)
+    # letter_local_updated = round(current_player_local)
 
     mapping_array = mapping(payer_call)
     if mapping_array.nil?
@@ -114,7 +114,6 @@ players = %w[player_1 player2]
 current_player = true
 
 # game starts
-
 
 # loop do
 #   break unless welcome
