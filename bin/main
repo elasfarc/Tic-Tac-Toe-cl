@@ -66,10 +66,21 @@ end
      puts Player.whos_turn? 
      while true
       puts outputs[:ask_input] 
-      input = gets.chomp
-      puts outputs[:wrong] if board.wrong_input?(input)
-      puts outputs[:taken] if board.already_taken?(input)
-        board.check_cell(input)
+      input = gets.chomp.upcase
+      #puts outputs[:wrong] if board.wrong_input?(input)
+      #puts outputs[:taken] if board.already_taken?(input)
+
+      input_status = check_input(input)
+      #puts outputs[input_status.to_sym] unless input_status == "accepted"
+      
+      unless input_status == "accepted"
+        puts outputs[input_status.to_sym]
+        next
+      end
+
+  
+     
+        #board.check_cell(input)
     end
      #board1.round(Player.current_player == )
    end

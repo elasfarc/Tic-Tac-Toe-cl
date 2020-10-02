@@ -23,8 +23,11 @@ class Board
         mapping(input) == nil 
      end
 
-    def already_taken?(move)
-        move != '_'
+    def already_taken?(input)
+        mapping_array = mapping(input)
+        # function 
+     @board[ mapping_array[0]][ mapping_array[1] ] != '_'
+        
     end
 
     def mapping(move)
