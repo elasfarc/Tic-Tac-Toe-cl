@@ -23,4 +23,9 @@ class Player
       "okay #{@@players_arry[1]} it's ur turn "
     end
   end
+
+  def self.play_again?(arg)
+    false if arg == "n"
+    arg == "y"
+  end
 end
