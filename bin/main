@@ -10,7 +10,7 @@ outputs = {
   winner: 'Congratulations you are the winner!',
   play_again: 'Do you want to keep playing? y/n'
 }
-input = ""
+input = ''
 game_on = true
 keep_going = true
 def welcome
@@ -68,7 +68,7 @@ while keep_going
 
       board.modify(Player.current_player, input)
       puts board.p_board
-      
+
       break
     end
 
