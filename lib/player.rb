@@ -25,6 +25,14 @@ class Player
     end
   end
 
+  def self.naming
+    if @@current_player
+        @@players_arry[0]
+    else
+        @@players_arry[1]
+    end
+  end
+
   def self.play_again?(arg)
     false if arg == 'n'
     arg == 'y'
