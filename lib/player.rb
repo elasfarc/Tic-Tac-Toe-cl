@@ -1,3 +1,4 @@
+# rubocop:disable Style/ClassVars
 class Player
   @@players_arry = []
   @@current_player = true
@@ -29,3 +30,4 @@ class Player
     arg == 'y'
   end
 end
+# rubocop:enable Style/ClassVars
