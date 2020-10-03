@@ -2,7 +2,7 @@
 class Player
   @@players_arry = []
   @@current_player = true
-  attr_accessor :name
+  attr_reader :name
 
   def initialize(name = 'unknown_player')
     @name = name

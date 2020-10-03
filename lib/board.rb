@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :board
+  attr_reader :board
 
   def initialize
     first_row = %w[_ _ _]
