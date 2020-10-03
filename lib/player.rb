@@ -33,5 +33,10 @@ class Player
     player_name != '' && player_name != ' ' && player_name.to_i.zero? &&
       ((player_name =~ /0/) != 0)
   end
+
+  def self.reset
+    @@players_arry = []
+    @@current_player = true
+  end
 end
 # rubocop:enable Style/ClassVars
