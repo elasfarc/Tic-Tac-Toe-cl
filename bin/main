@@ -62,7 +62,7 @@ while keep_going
   end
   valid_name = false
   until valid_name
-    puts  "what about second player's name?"
+    puts "what about second player's name?"
     player_name = gets.chomp
     valid_name = Player.valid_name?(player_name)
     unless valid_name
@@ -72,7 +72,6 @@ while keep_going
     p2 = Player.new(player_name)
     puts "cool! #{p2.name}, let's start to play "
   end
-  
 
   board = Board.new
   puts board.p_board
