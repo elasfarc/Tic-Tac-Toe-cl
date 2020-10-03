@@ -27,19 +27,24 @@ class Player
 
   def self.naming
     if @@current_player
-        @@players_arry[0]
+      @@players_arry[0]
     else
-        @@players_arry[1]
+      @@players_arry[1]
     end
   end
 
   def self.play_again?(arg)
     arg == 'y'
   end
-  
+
   def self.valid_name?(player_name)
     player_name != '' && player_name != ' ' && player_name.to_i.zero? &&
       ((player_name =~ /0/) != 0)
+  end
+
+  def self.reset
+    @@players_arry = []
+    @@current_player = true
   end
 end
 # rubocop:enable Style/ClassVars

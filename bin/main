@@ -13,8 +13,7 @@ outputs = {
   play_again: 'Do you want to keep playing? (y) to play again/ any key to exit'
 }
 input = ''
-valid_name = false
-game_on = true
+
 keep_going = true
 def welcome
   puts 'Welcome to the Tic Tac Toe game!'
@@ -45,7 +44,10 @@ end
 
 # game starts
 while keep_going
+  valid_name = false
+  game_on = true
   break unless welcome
+
   instructions
   until valid_name
     puts "Okay master! May I have first player's name?"
@@ -60,7 +62,7 @@ while keep_going
   end
   valid_name = false
   until valid_name
-    puts  "what about second player's name?"
+    puts "what about second player's name?"
     player_name = gets.chomp
     valid_name = Player.valid_name?(player_name)
     unless valid_name
@@ -81,7 +83,7 @@ while keep_going
       input_status = board.check_input(input)
 
       unless input_status == 'accepted'
-        puts Player.naming + ", " + outputs[input_status.to_sym]
+        puts Player.naming + ', ' + outputs[input_status.to_sym]
         next
       end
 
@@ -95,7 +97,7 @@ while keep_going
     game_status = board.game_finish?(Player.current_player, input)
 
     if game_status
-      print Player.naming + ", " if game_status == 'winner'
+      print Player.naming + ', ' if game_status == 'winner'
       puts outputs[game_status.to_sym]
       game_on = !game_on
     end
@@ -103,5 +105,6 @@ while keep_going
   end
   puts outputs[:play_again]
   keep_going = Player.play_again?(gets.chomp.downcase)
+  Player.reset if keep_going
 
 end
