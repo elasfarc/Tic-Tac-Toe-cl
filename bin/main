@@ -5,6 +5,7 @@ require_relative '../lib/board.rb'
 
 outputs = {
   ask_input: 'Write a letter from A to C and a number from 1 to 3',
+  invalid_name: 'My master name can not be empty or just a number, let\'s try again! ',
   wrong: 'wrong input',
   taken: 'already taken',
   draw: 'it\'s a draw',
@@ -14,6 +15,7 @@ outputs = {
 input = ''
 game_on = true
 keep_going = true
+valid_name = false
 def welcome
   puts 'Welcome to the Tic Tac Toe game!'
   puts 'do you want to proceed? (y/n)'
@@ -46,11 +48,32 @@ while keep_going
   break unless welcome
 
   instructions
-  puts "Okay master! May I have first player's name?"
-  p1 = Player.new(gets.chomp)
-  puts "cool! #{p1.name}, what about second player's name?"
-  p2 = Player.new(gets.chomp)
-  puts "cool! #{p2.name}, let's start to play "
+
+  until valid_name
+    puts "Okay master! May I have first player's name?"
+    player_name = gets.chomp
+    valid_name = Player.valid_name?(player_name)
+    unless valid_name
+      puts outputs[:invalid_name]
+      next
+    end
+    p1 = Player.new(player_name)
+    puts "cool! #{p1.name}"
+  end
+  valid_name = false
+  until valid_name
+    puts  "what about second player's name?"
+    player_name = gets.chomp
+    valid_name = Player.valid_name?(player_name)
+    unless valid_name
+      puts outputs[:invalid_name]
+      next
+    end
+    p2 = Player.new(player_name)
+    puts "cool! #{p2.name}, let's start to play "
+  end
+  
+
   board = Board.new
   puts board.p_board
   while game_on
