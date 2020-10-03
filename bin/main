@@ -9,7 +9,7 @@ outputs = {
   taken: 'already taken',
   draw: 'it\'s a draw',
   winner: 'Congratulations you are the winner!',
-  play_again: 'Do you want to keep playing? y/n'
+  play_again: 'Do you want to keep playing? (y) to play again/ any key to exit'
 }
 input = ''
 game_on = true
