@@ -106,6 +106,3 @@ class Board
       ((@board[0][2] == letter) && (@board[1][1] == letter) && (@board[2][0] == letter))
   end
 end
-
-# board1 = Board.new
-# puts board1.print_board
