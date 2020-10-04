@@ -1,5 +1,19 @@
 #!/usr/bin/env ruby
-require_relative '../lib/game_logic.rb'
+
+require_relative '../lib/player.rb'
+require_relative '../lib/board.rb'
+
+outputs = {
+  ask_input: 'Write a letter from A to C and a number from 1 to 3',
+  invalid_name: 'My master name can not be empty or just a number, let\'s try again! ',
+  wrong: 'wrong input',
+  taken: 'already taken',
+  draw: 'it\'s a draw',
+  winner: 'Congratulations you are the winner!',
+  play_again: 'Do you want to keep playing? (y) to play again/ any key to exit'
+}
+input = ''
+keep_going = true
 
 def welcome
   puts 'Welcome to the Tic Tac Toe game!'
@@ -28,120 +42,68 @@ def instructions
    5)If all 9 squares are full, the game is over \n \n"
 end
 
-def players_setting
-  players_arry = []
-  puts "Okay master! May I have first player's name?"
-  user_answer = gets.chomp
-  players_arry[0] = user_answer
-  puts "cool! #{players_arry[0]}, what about second player's name?"
-  user_answer = gets.chomp
-  players_arry[1] = user_answer
-  puts "cool! #{players_arry[1]}, let's start to play "
-  players_arry
-end
-
-def user_choice(board_local, current_player_local)
-  loop do
-    puts 'Write a letter from A to C and a number from 1 to 3'
-    payer_call = gets.chomp.upcase
-
-    letter_local_updated = round(current_player_local)
-
-    mapping_array = mapping(payer_call)
-    if mapping_array.nil?
-      puts "wrong input \n"
-      next
-    end
-    dummy_booleen = not_taken?(board_local[mapping_array[0]][mapping_array[1]])
-
-    if dummy_booleen
-
-      board_local[mapping_array[0]][mapping_array[1]] = letter_local_updated
-      break
-    else
-      puts 'already taken'
-    end
-  end
-
-  board_matrix(board_local)
-  board_local
-end
-
-def board_matrix(board)
-  puts "#{board[0][0]} #{board[0][1]} #{board[0][2]}"
-  puts "#{board[1][0]} #{board[1][1]} #{board[1][2]}"
-  puts "#{board[2][0]} #{board[2][1]} #{board[2][2]}"
-end
-
-def round(current_player_local)
-  letter = if current_player_local
-
-             'X'
-           else
-             'O'
-           end
-  letter
-end
-
-def whos_turn?(players_array, current_player_local)
-  if current_player_local
-    pp "okay #{players_array[0]} it's ur turn "
-
-  else
-    pp "okay #{players_array[1]} it's ur turn "
-  end
-end
-
-def not_taken?(move)
-  move == '_'
-end
-
-def mapping(move)
-  move = move.to_sym
-  board_hash = { A1: [0, 0], A2: [0, 1], A3: [0, 2],
-                 B1: [1, 0], B2: [1, 1], B3: [1, 2],
-                 C1: [2, 0], C2: [2, 1], C3: [2, 2] }
-  board_hash[move]
-end
-
-def draw?(board)
-  flag = []
-  flag[0] = board[0].none? { |cell| cell == '_' }
-  flag[1] = board[1].none? { |cell| cell == '_' }
-  flag[2] = board[2].none? { |cell| cell == '_' }
-
-  flag.all? { |f| f == true }
-end
-
-first_row = %w[_ _ _]
-second_row = %w[_ _ _]
-third_row = %w[_ _ _]
-board = [first_row, second_row, third_row]
-players = %w[player_1 player2]
-current_player = true
-
 # game starts
-
-loop do
+while keep_going
+  valid_name = false
+  game_on = true
   break unless welcome
 
   instructions
-  players = players_setting
-  board_matrix(board)
-  puts "\n"
-
-  loop do
-    whos_turn?(players, current_player)
-    board = user_choice(board, current_player)
-    # Break unless we have a winner
-    break if draw?(board)
-
-    puts "\n \n"
-    current_player = !current_player
+  until valid_name
+    puts "Okay master! May I have first player's name?"
+    player_name = gets.chomp
+    valid_name = Player.valid_name?(player_name)
+    unless valid_name
+      puts outputs[:invalid_name]
+      next
+    end
+    p1 = Player.new(player_name)
+    puts "cool! #{p1.name}"
   end
-  if draw?(board)
-    pp "It's a draw "
-    break
+  valid_name = false
+  until valid_name
+    puts "what about second player's name?"
+    player_name = gets.chomp
+    valid_name = Player.valid_name?(player_name)
+    unless valid_name
+      puts outputs[:invalid_name]
+      next
+    end
+    p2 = Player.new(player_name)
+    puts "cool! #{p2.name}, let's start to play "
   end
-  # Method: Play_again? Break if not
+
+  board = Board.new
+  puts board.p_board
+  while game_on
+
+    puts Player.whos_turn?
+    loop do
+      puts outputs[:ask_input]
+      input = gets.chomp.upcase
+
+      input_status = board.check_input(input)
+
+      unless input_status == 'accepted'
+        puts outputs[input_status.to_sym]
+        next
+      end
+
+      board.modify(Player.current_player, input)
+      puts board.p_board
+
+      break
+    end
+
+    game_status = board.game_finish?(Player.current_player, input)
+
+    if game_status
+      puts outputs[game_status.to_sym]
+      game_on = !game_on
+    end
+    Player.switch_player
+  end
+  puts outputs[:play_again]
+  keep_going = Player.play_again?(gets.chomp.downcase)
+  Player.reset if keep_going
 end
