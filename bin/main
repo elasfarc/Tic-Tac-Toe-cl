@@ -64,22 +64,25 @@ while keep_going
     end
     p1.name= player_name
     puts "cool! #{p1.name}"
+    game.players_arry= [p1]
   end
   valid_name = false
   until valid_name
     puts "what about second player's name?"
     p2 = Player.new
     player_name = gets.chomp
-    valid_name = p2.valid_name?(player_name)
+    valid_name = p2.valid_name?(player_name) && game.player_two_not_the_same_as_player_one?(player_name)
     unless valid_name
       puts outputs[:invalid_name]
+      puts 'duplicated name?'
       next
     end
     p2.name= player_name
     puts "cool! #{p2.name}, let's start to play "
+    game.players_arry.push(p2)
   end
 
-  game.players_arry= [p1, p2]
+  #game.players_arry= [p1, p2]
   # pp game.players_arry[0].name
   board = Board.new
   while game_on
