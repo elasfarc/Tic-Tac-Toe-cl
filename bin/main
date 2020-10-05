@@ -50,6 +50,7 @@ while keep_going
   valid_name = false
   game_on = true
   break unless welcome
+
   instructions
   until valid_name
     puts "Okay master! May I have first player's name?"
@@ -85,7 +86,7 @@ while keep_going
       input_status = board.check_input(input)
 
       unless input_status == 'accepted'
-        puts Player.naming + ", " + outputs[input_status.to_sym]
+        puts Player.naming + ', ' + outputs[input_status.to_sym]
         next
       end
 
@@ -99,7 +100,7 @@ while keep_going
     game_status = board.game_finish?(Player.current_player, input)
 
     if game_status
-      print Player.naming + ", " if game_status == 'winner'
+      print Player.naming + ', ' if game_status == 'winner'
       puts outputs[game_status.to_sym]
       game_on = !game_on
     end
