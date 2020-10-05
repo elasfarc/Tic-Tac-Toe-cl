@@ -15,6 +15,7 @@ outputs = {
 input = ''
 
 keep_going = true
+
 def welcome
   puts 'Welcome to the Tic Tac Toe game!'
   puts 'do you want to proceed? (y/n)'
@@ -106,5 +107,4 @@ while keep_going
   puts outputs[:play_again]
   keep_going = Player.play_again?(gets.chomp.downcase)
   Player.reset if keep_going
-
 end
