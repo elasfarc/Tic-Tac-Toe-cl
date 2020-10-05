@@ -6,15 +6,15 @@ require_relative '../lib/board.rb'
 outputs = {
   ask_input: 'Write a letter from A to C and a number from 1 to 3',
   invalid_name: 'My master name can not be empty or just a number, let\'s try again! ',
-  wrong: 'wrong input',
-  taken: 'already taken',
+  wrong: 'that\'s a wrong input... try again master! ',
+  taken: 'this cell is already taken!... try again master! ',
   draw: 'it\'s a draw',
-  winner: 'Congratulations you are the winner!',
+  winner: 'congratulations you are the winner!',
   play_again: 'Do you want to keep playing? (y) to play again/ any key to exit'
 }
 input = ''
-keep_going = true
 
+keep_going = true
 def welcome
   puts 'Welcome to the Tic Tac Toe game!'
   puts 'do you want to proceed? (y/n)'
@@ -72,9 +72,7 @@ while keep_going
     p2 = Player.new(player_name)
     puts "cool! #{p2.name}, let's start to play "
   end
-
   board = Board.new
-  puts board.p_board
   while game_on
 
     puts Player.whos_turn?
@@ -85,19 +83,21 @@ while keep_going
       input_status = board.check_input(input)
 
       unless input_status == 'accepted'
-        puts outputs[input_status.to_sym]
+        puts Player.naming + ', ' + outputs[input_status.to_sym]
         next
       end
 
       board.modify(Player.current_player, input)
+      puts "\n"
       puts board.p_board
-
+      puts "\n"
       break
     end
 
     game_status = board.game_finish?(Player.current_player, input)
-
+    print Player.naming + ', ' if game_status == 'winner'
     if game_status
+
       puts outputs[game_status.to_sym]
       game_on = !game_on
     end
@@ -106,4 +106,5 @@ while keep_going
   puts outputs[:play_again]
   keep_going = Player.play_again?(gets.chomp.downcase)
   Player.reset if keep_going
+
 end
