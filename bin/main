@@ -2,6 +2,7 @@
 
 require_relative '../lib/player.rb'
 require_relative '../lib/board.rb'
+require_relative '../lib/game.rb'
 
 outputs = {
   ask_input: 'Write a letter from A to C and a number from 1 to 3',
@@ -43,6 +44,8 @@ def instructions
 end
 
 # game starts
+game = Game.new
+
 while keep_going
   valid_name = false
   game_on = true
@@ -51,27 +54,32 @@ while keep_going
   instructions
   until valid_name
     puts "Okay master! May I have first player's name?"
+    p1 = Player.new
     player_name = gets.chomp
-    valid_name = Player.valid_name?(player_name)
+    valid_name = p1.valid_name?(player_name)
     unless valid_name
       puts outputs[:invalid_name]
       next
     end
-    p1 = Player.new(player_name)
+    p1.name= player_name
     puts "cool! #{p1.name}"
   end
   valid_name = false
   until valid_name
     puts "what about second player's name?"
+    p2 = Player.new
     player_name = gets.chomp
-    valid_name = Player.valid_name?(player_name)
+    valid_name = p2.valid_name?(player_name)
     unless valid_name
       puts outputs[:invalid_name]
       next
     end
-    p2 = Player.new(player_name)
+    p2.name= player_name
     puts "cool! #{p2.name}, let's start to play "
   end
+
+  game.players_arry= [p1, p2]
+  pp game.players_arry[0].name
   board = Board.new
   while game_on
 
