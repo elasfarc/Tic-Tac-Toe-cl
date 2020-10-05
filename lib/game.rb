@@ -17,17 +17,17 @@ class Game
   
     def whos_turn?
       if current_player
-        "okay #{@players_arry[0]} it's ur turn "
+        "okay #{@players_arry[0].name} it's ur turn "
       else
-        "okay #{@players_arry[1]} it's ur turn "
+        "okay #{@players_arry[1].name} it's ur turn "
       end
     end
   
     def naming
       if @current_player
-        @players_arry[0]
+        @players_arry[0].name
       else
-        @players_arry[1]
+        @players_arry[1].name
       end
     end
   
