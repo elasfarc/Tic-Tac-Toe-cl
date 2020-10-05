@@ -30,7 +30,7 @@ class Board
 
   def already_taken?(input)
     mapping_array = mapping(input)
-    # function
+ 
     @board[mapping_array[0]][ mapping_array[1] ] != '_'
   end
 
@@ -38,7 +38,7 @@ class Board
     letter = round(current_player)
 
     mapping_array = mapping(input)
-    # function
+
     @board[mapping_array[0]][mapping_array[1]] = letter
   end
 

@@ -1,5 +1,4 @@
 class Game
-    #@players_arry = []
     attr_accessor :players_arry
     @current_player
     

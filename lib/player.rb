@@ -9,6 +9,4 @@ class Player
 
 end
 
-#p1 = Player.new
-#p1.name= 'mo'
-#pp p1.name           
+       
