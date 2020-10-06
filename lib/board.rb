@@ -32,7 +32,7 @@ class Board
 
   def already_taken?(input)
     mapping_array = mapping(input)
- 
+
     @board[mapping_array[0]][ mapping_array[1] ] != '_'
   end
 
@@ -81,6 +81,7 @@ class Board
   def winner?(current_player, input)
     arr = mapping(input)
     return true if horizontal_match?(arr) || vertical_match?(arr)
+
     if arr[0] == arr[1] || (arr[0] - arr[1]).abs == 2
       letter = round(current_player)
       return true if diagonal_check(letter)
@@ -90,7 +91,7 @@ class Board
   end
 
   def horizontal_match?(ary)
-    (@board[ary[0]][0] == @board[ary[0]][1]) && (@board[ary[0]][1] == @board[ary[0]][2] )
+    (@board[ary[0]][0] == @board[ary[0]][1]) && (@board[ary[0]][1] == @board[ary[0]][2])
   end
 
   def vertical_match?(ary)
