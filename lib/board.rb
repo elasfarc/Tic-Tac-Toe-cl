@@ -9,9 +9,11 @@ class Board
   end
 
   def p_board
-    "#{@board[0][0]} #{@board[0][1]} #{@board[0][2]}\n" \
-      "#{@board[1][0]} #{@board[1][1]} #{@board[1][2]}\n" \
-      "#{@board[2][0]} #{@board[2][1]} #{@board[2][2]}"
+    "| #{@board[0][0]} | #{@board[0][1]} | #{@board[0][2]} |\n" \
+    "--------------\n" \
+      "| #{@board[1][0]} | #{@board[1][1]} | #{@board[1][2]} |\n" \
+    "--------------\n" \
+      "| #{@board[2][0]} | #{@board[2][1]} | #{@board[2][2]} |\n"
   end
 
   def check_input(input)
@@ -78,9 +80,7 @@ class Board
 
   def winner?(current_player, input)
     arr = mapping(input)
-    return true if horizontal_match?(arr)
-    return true if vertical_match?(arr)
-
+    return true if horizontal_match?(arr) || vertical_match?(arr)
     if arr[0] == arr[1] || (arr[0] - arr[1]).abs == 2
       letter = round(current_player)
       return true if diagonal_check(letter)
