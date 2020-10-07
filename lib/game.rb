@@ -13,7 +13,7 @@ class Game
     @current_player = !@current_player
   end
 
-  attr_reader :current_player
+  attr_accessor :current_player
 
   def whos_turn?
     if current_player
