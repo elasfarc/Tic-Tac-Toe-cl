@@ -9,9 +9,11 @@ class Board
   end
 
   def p_board
-    "#{@board[0][0]} #{@board[0][1]} #{@board[0][2]}\n" \
-      "#{@board[1][0]} #{@board[1][1]} #{@board[1][2]}\n" \
-      "#{@board[2][0]} #{@board[2][1]} #{@board[2][2]}"
+    "| #{@board[0][0]} | #{@board[0][1]} | #{@board[0][2]} |\n" \
+    "--------------\n" \
+      "| #{@board[1][0]} | #{@board[1][1]} | #{@board[1][2]} |\n" \
+    "--------------\n" \
+      "| #{@board[2][0]} | #{@board[2][1]} | #{@board[2][2]} |\n"
   end
 
   def check_input(input)
@@ -30,7 +32,7 @@ class Board
 
   def already_taken?(input)
     mapping_array = mapping(input)
-    # function
+
     @board[mapping_array[0]][ mapping_array[1] ] != '_'
   end
 
@@ -38,7 +40,7 @@ class Board
     letter = round(current_player)
 
     mapping_array = mapping(input)
-    # function
+
     @board[mapping_array[0]][mapping_array[1]] = letter
   end
 
@@ -78,30 +80,25 @@ class Board
 
   def winner?(current_player, input)
     arr = mapping(input)
-    letter = round(current_player)
-    return true if horizontal_check(arr, letter)
-    return true if vertical_check(arr, letter)
+    return true if horizontal_match?(arr) || vertical_match?(arr)
 
     if arr[0] == arr[1] || (arr[0] - arr[1]).abs == 2
-      return true if diagonal_check(arr, letter)
+      letter = round(current_player)
+      return true if diagonal_check(letter)
     end
 
     false
   end
 
-  def horizontal_check(ary, letter)
-    (@board[ary[0]][0] == letter) &&
-      (@board[ary[0]][1] == letter) &&
-      (@board[ary[0]][2] == letter)
+  def horizontal_match?(ary)
+    (@board[ary[0]][0] == @board[ary[0]][1]) && (@board[ary[0]][1] == @board[ary[0]][2])
   end
 
-  def vertical_check(ary, letter)
-    (@board[0][ary[1]] == letter) &&
-      (@board[1][ary[1]] == letter) &&
-      (@board[2][ary[1]] == letter)
+  def vertical_match?(ary)
+    (@board[0][ary[1]] == @board[1][ary[1]]) && (@board[1][ary[1]] == @board[2][ary[1]])
   end
 
-  def diagonal_check(_ary, letter)
+  def diagonal_check(letter)
     ((@board[0][0] == letter) && (@board[1][1] == letter) && (@board[2][2] == letter)) ||
       ((@board[0][2] == letter) && (@board[1][1] == letter) && (@board[2][0] == letter))
   end
