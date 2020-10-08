@@ -2,7 +2,7 @@ require_relative '../lib/board.rb'
 
 RSpec.describe Board do
   let(:board) { Board.new }
-  let(:input) { '' }
+  let(:input) { 'A1' }
   let(:game) { double('game object with current player true', current_player: true) }
   let(:game2) { double('game object with current player false', current_player: false) }
   describe '#p_board' do
@@ -23,25 +23,21 @@ RSpec.describe Board do
 
     it 'return taken if the input is not "_"' do
       board.board = [%w[x _ _], %w[_ _ _], %w[_ _ _]]
-      input = 'A1'
       expect(board.check_input(input)).to eq('taken')
     end
 
     it 'return accepted if it is in range ( A : C -> 1 : 3 )' do
-      input = 'A1'
       expect(board.check_input(input)).to eq 'accepted'
     end
   end
 
   describe '#modify' do
     it 'wirte the player choosen board\'s cell  to X if current player is player one  ' do
-      input = 'A1'
       board.modify(game.current_player, input)
       expect(board.board[0][0]).to eq('X')
     end
 
     it 'wirte the player choosen board\'s cell  to "O" if current player is player two  ' do
-      input = 'A1'
       board.modify(game2.current_player, input)
       expect(board.board[0][0]).to eq('O')
     end
@@ -49,26 +45,22 @@ RSpec.describe Board do
 
   describe '#game_finish?' do
     it 'returns false if there is no winner and its not a draw' do
-      input = 'A1'
       board.board = [%w[x _ _], %w[_ _ _], %w[_ _ _]]
       expect(board.game_finish?(game.current_player, input)).to eq(false)
     end
 
     it 'returns "winner" if there is a horizontal match ' do
-      input = 'A1'
       board.board = [%w[x x x], %w[_ _ _], %w[_ _ _]]
       expect(board.game_finish?(game.current_player, input)).to eq('winner')
     end
 
     it 'returns "winner" if there is a vertical match ' do
-      input = 'A1'
       board.board = [%w[x y y], %w[x _ _], %w[x _ _]]
       expect(board.game_finish?(game.current_player, input)).to eq('winner')
     end
 
     it 'returns "winner" if there is a diagonal match
         if and only if user input (down diagonal -> A1,B2,C3)' do
-      input = 'A1'
       board.board = [%w[X y y], %w[y X _], %w[_ _ X]]
       expect(board.game_finish?(game.current_player, input)).to eq('winner')
     end
@@ -81,7 +73,6 @@ RSpec.describe Board do
     end
 
     it 'returns "draw" if all cells are occupied without a winner' do
-      input = 'A1'
       board.board = [%w[X O X], %w[X O O], %w[O X X]]
       expect(board.game_finish?(game2.current_player, input)).to eq('draw')
     end
