@@ -26,16 +26,6 @@ class Board
     end
   end
 
-  def wrong_input?(input)
-    mapping(input).nil?
-  end
-
-  def already_taken?(input)
-    mapping_array = mapping(input)
-
-    @board[mapping_array[0]][ mapping_array[1] ] != '_'
-  end
-
   def modify(current_player, input)
     letter = round(current_player)
 
@@ -44,14 +34,23 @@ class Board
     @board[mapping_array[0]][mapping_array[1]] = letter
   end
 
-  def round(current_player_local)
-    letter = if current_player_local
 
-               'X'
-             else
-               'O'
-             end
-    letter
+  def game_finish?(current_player, input)
+    return 'winner' if winner?(current_player, input)
+    return 'draw' if draw?
+
+    false
+  end
+
+  private
+  def wrong_input?(input)
+    mapping(input).nil?
+  end
+  
+  def already_taken?(input)
+    mapping_array = mapping(input)
+
+    @board[mapping_array[0]][ mapping_array[1] ] != '_'
   end
 
   def mapping(move)
@@ -61,14 +60,15 @@ class Board
                    C1: [2, 0], C2: [2, 1], C3: [2, 2] }
     board_hash[move]
   end
+  def round(current_player_local)
+    letter = if current_player_local
 
-  def game_finish?(current_player, input)
-    return 'winner' if winner?(current_player, input)
-    return 'draw' if draw?
-
-    false
+               'X'
+             else
+               'O'
+             end
+    letter
   end
-
   def draw?
     flag = []
     flag[0] = @board[0].none? { |cell| cell == '_' }
