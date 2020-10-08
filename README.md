@@ -46,6 +46,13 @@ Click on the Live Demo link below, once there click on 'Run' and the game will s
 
 10)If you want to terminate the programm, press 'control' + 'c'.
 
+
+## Testing Instructions
+
+- For testing Run 'rspec' in the terminal from inside the programm folder.
+
+
+
 ## Authors
 
 👤 **Mohammed Al-Asfar**
