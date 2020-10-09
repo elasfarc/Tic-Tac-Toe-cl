@@ -7,7 +7,8 @@
 
 ## Repl
 
-[live view](https://repl.it/@karmaester/Tic-Tac-Toe#main.rb)
+
+[![Run on Repl.it](https://repl.it/badge/github/elasfarc/Tic-Tac-Toe-cl)](https://repl.it/github/elasfarc/Tic-Tac-Toe-cl)
 
 
 ## Getting Started
