@@ -22,7 +22,6 @@ RSpec.describe Board do
   end
 
   describe '#check_input' do
-
     context 'Invalid user Input !( A : C -> 1 : 3 )' do
       it 'return wrong' do
         input = 'd'
@@ -48,8 +47,6 @@ RSpec.describe Board do
           expect(board.check_input(input)).to_not eq 'good'
         end
       end
-
-
     end
   end
 
