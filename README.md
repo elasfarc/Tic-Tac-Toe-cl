@@ -9,7 +9,8 @@
 
 [live view](https://repl.it/@karmaester/Tic-Tac-Toe#main.rb)
 
-
+## screenshoot
+![screenshot](Scr.png)
 ## Getting Started
 
 You should have Ruby installed to run this.
