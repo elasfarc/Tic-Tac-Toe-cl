@@ -22,7 +22,8 @@ RSpec.describe Board do
   end
 
   describe '#check_input' do
-    context 'not a valid input !( A : C -> 1 : 3 )' do
+
+    context 'Invalid user Input !( A : C -> 1 : 3 )' do
       it 'return wrong' do
         input = 'd'
         expect(board.check_input(input)).to eq('wrong')
@@ -31,20 +32,24 @@ RSpec.describe Board do
       end
     end
 
-    context 'the cell that the user choosed is not empty' do
-      it 'returns taken' do
-        board.board = [%w[_ _ _], %w[_ _ _], %w[_ _ _]]
-        expect(board.check_input(input)).to_not eq('taken')
-        board.board = [%w[x _ _], %w[_ _ _], %w[_ _ _]]
-        expect(board.check_input(input)).to eq('taken')
+    context 'valid user Input' do
+      context 'the cell that the user choosed is not empty' do
+        it 'returns taken' do
+          board.board = [%w[_ _ _], %w[_ _ _], %w[_ _ _]]
+          expect(board.check_input(input)).to_not eq('taken')
+          board.board = [%w[x _ _], %w[_ _ _], %w[_ _ _]]
+          expect(board.check_input(input)).to eq('taken')
+        end
       end
-    end
 
-    context 'the user input is valid ( A : C -> 1 : 3 )' do
-      it 'return accepted' do
-        expect(board.check_input(input)).to eq 'accepted'
-        expect(board.check_input(input)).to_not eq 'good'
+      context 'the user input is valid ( A : C -> 1 : 3 ) && not taken by another move' do
+        it 'return accepted' do
+          expect(board.check_input(input)).to eq 'accepted'
+          expect(board.check_input(input)).to_not eq 'good'
+        end
       end
+
+
     end
   end
 
