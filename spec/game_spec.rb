@@ -9,36 +9,52 @@ RSpec.describe Game do
       game.players_arry = [player_one]
 
       expect(game.player_two_is_the_same_as_player_one?('Recardo')).to eq(true)
+      expect(game.player_two_is_the_same_as_player_one?('Ted')).to_not eq(true)
     end
   end
 
   describe '#switch_player' do
-    it 'if it true it will gonna be false and if its false it gonna be true' do
-      expect(game.switch_player).to eq(false)
+    context 'current player is true' do
+      it 'changes current_player to false' do
+        expect(game.switch_player).to eq(false)
+      end
+    end
+    context 'current player is false' do
+      it 'changes current_player to true' do
+        game.current_player = false
+        expect(game.switch_player).to eq(true)
+      end
     end
   end
 
   describe '#whos_turn?' do
-    it 'return player one name if current player is true' do
-      game.players_arry = [player_one, player_two]
-      expect(game.whos_turn?).to eq('Recardo')
+    context 'current player is true' do
+      it 'return player one name' do
+        game.players_arry = [player_one, player_two]
+        expect(game.whos_turn?).to eq('Recardo')
+      end
     end
-
-    it 'return player two name if current player is false' do
-      game.players_arry = [player_one, player_two]
-      game.current_player = false
-      expect(game.whos_turn?).to eq('Ted')
+    context 'current player is false' do
+      it 'return player two name' do
+        game.players_arry = [player_one, player_two]
+        game.current_player = false
+        expect(game.whos_turn?).to eq('Ted')
+      end
     end
   end
 
   describe '#play_again?' do
-    it 'returns true if the user input passed to it was "y" ' do
-      user_input = 'y'
-      expect(game.play_again?(user_input)).to eq(true)
+    context 'the user input passed to it is "y"' do
+      it 'returns true' do
+        user_input = 'y'
+        expect(game.play_again?(user_input)).to eq(true)
+      end
     end
-    it 'returns false if the user input passed to it was\'nt "y" ' do
-      user_input = 'n'
-      expect(game.play_again?(user_input)).to eq(false)
+    context 'the user input passed to it different than "y"' do
+      it 'returns false' do
+        user_input = 'n'
+        expect(game.play_again?(user_input)).to eq(false)
+      end
     end
   end
 
@@ -50,6 +66,9 @@ RSpec.describe Game do
     end
 
     it 'reset game object\'s variable [@current_player] to default' do
+      game.current_player = true
+      game.reset
+      expect(game.current_player).to eq(true)
       game.current_player = false
       game.reset
       expect(game.current_player).to eq(true)

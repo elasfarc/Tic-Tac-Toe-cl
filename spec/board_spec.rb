@@ -6,40 +6,62 @@ RSpec.describe Board do
   let(:game) { double('game object with current player true', current_player: true) }
   let(:game2) { double('game object with current player false', current_player: false) }
   describe '#p_board' do
-    it 'prints the board' do
+    it 'returns the board' do
       expect(board.p_board).to eq("| #{board.board[0][0]} | #{board.board[0][1]} | #{board.board[0][2]} |\n" \
       "--------------\n" \
         "| #{board.board[1][0]} | #{board.board[1][1]} | #{board.board[1][2]} |\n" \
       "--------------\n" \
         "| #{board.board[2][0]} | #{board.board[2][1]} | #{board.board[2][2]} |\n")
+
+      expect(board.p_board).to_not eq("| #{board.board[0][0]} | #{board.board[0][1]} | #{board.board[0][2]} |\n" \
+        "--------------\n" \
+          "| #{board.board[1][0]} | #{board.board[1][1]} | #{board.board[1][2]} |\n" \
+        "-------------------------------------------------------------\n" \
+          "| #{board.board[2][0]} | #{board.board[2][1]} | #{board.board[2][2]} |\n")
     end
   end
 
   describe '#check_input' do
-    it 'return wrong if not a valid input !( A : C -> 1 : 3 )' do
-      input = 'd'
-      expect(board.check_input(input)).to eq('wrong')
+    context 'not a valid input !( A : C -> 1 : 3 )' do
+      it 'return wrong' do
+        input = 'd'
+        expect(board.check_input(input)).to eq('wrong')
+        input = 'A1'
+        expect(board.check_input(input)).to_not eq('wrong')
+      end
     end
 
-    it 'return taken if the input is not "_"' do
-      board.board = [%w[x _ _], %w[_ _ _], %w[_ _ _]]
-      expect(board.check_input(input)).to eq('taken')
+    context 'the cell that the user choosed is not empty' do
+      it 'returns taken' do
+        board.board = [%w[_ _ _], %w[_ _ _], %w[_ _ _]]
+        expect(board.check_input(input)).to_not eq('taken')
+        board.board = [%w[x _ _], %w[_ _ _], %w[_ _ _]]
+        expect(board.check_input(input)).to eq('taken')
+      end
     end
 
-    it 'return accepted if it is in range ( A : C -> 1 : 3 )' do
-      expect(board.check_input(input)).to eq 'accepted'
+    context 'the user input is valid ( A : C -> 1 : 3 )' do
+      it 'return accepted' do
+        expect(board.check_input(input)).to eq 'accepted'
+        expect(board.check_input(input)).to_not eq 'good'
+      end
     end
   end
 
   describe '#modify' do
-    it 'wirte the player choosen board\'s cell  to X if current player is player one  ' do
-      board.modify(game.current_player, input)
-      expect(board.board[0][0]).to eq('X')
+    context 'current player is player one' do
+      it 'write X to the correspond cell' do
+        board.modify(game.current_player, input)
+        expect(board.board[0][0]).to eq('X')
+        expect(board.board[0][0]).to_not eq('O')
+      end
     end
-
-    it 'wirte the player choosen board\'s cell  to "O" if current player is player two  ' do
-      board.modify(game2.current_player, input)
-      expect(board.board[0][0]).to eq('O')
+    context 'current player is player two' do
+      it 'write O to the correspond cell' do
+        board.modify(game2.current_player, input)
+        expect(board.board[0][0]).to eq('O')
+        expect(board.board[0][0]).to_not eq('X')
+      end
     end
   end
 
@@ -49,32 +71,54 @@ RSpec.describe Board do
       expect(board.game_finish?(game.current_player, input)).to eq(false)
     end
 
-    it 'returns "winner" if there is a horizontal match ' do
-      board.board = [%w[x x x], %w[_ _ _], %w[_ _ _]]
-      expect(board.game_finish?(game.current_player, input)).to eq('winner')
+    describe 'with winner' do
+      context 'horizontal match' do
+        it 'returns "winner" ' do
+          board.board = [%w[x x x], %w[_ _ _], %w[_ _ _]]
+          expect(board.game_finish?(game.current_player, input)).to eq('winner')
+          board.board = [%w[X _ X], %w[O O X], %w[_ _ _]]
+          expect(board.game_finish?(game.current_player, input)).to_not eq('winner')
+        end
+      end
+
+      context 'vertical match' do
+        it 'returns "winner" ' do
+          board.board = [%w[x y y], %w[x _ _], %w[x _ _]]
+          expect(board.game_finish?(game.current_player, input)).to eq('winner')
+          board.board = [%w[x y y], %w[x _ _], %w[o _ _]]
+          expect(board.game_finish?(game.current_player, input)).to_not eq('winner')
+        end
+      end
+
+      context 'Diagonal match' do
+        context 'down diagonal (input ->A1,B2,C3)' do
+          it 'returns "winner" ' do
+            board.board = [%w[X y y], %w[y X _], %w[_ _ X]]
+            expect(board.game_finish?(game.current_player, input)).to eq('winner')
+            board.board = [%w[X O O], %w[O X _], %w[_ _ O]]
+            expect(board.game_finish?(game.current_player, input)).to_not eq('winner')
+          end
+        end
+        context 'up diagonal (input-> C1,A3)' do
+          it 'returns "winner"' do
+            input = 'C1'
+            board.board = [%w[_ _ O], %w[_ O _], %w[O _ x]]
+            expect(board.game_finish?(game2.current_player, input)).to eq('winner')
+            board.board = [%w[_ _ O], %w[_ O _], %w[X _ X]]
+            expect(board.game_finish?(game2.current_player, input)).to_not eq('winner')
+          end
+        end
+      end
     end
 
-    it 'returns "winner" if there is a vertical match ' do
-      board.board = [%w[x y y], %w[x _ _], %w[x _ _]]
-      expect(board.game_finish?(game.current_player, input)).to eq('winner')
-    end
+    context 'all cells are occupied without a winner' do
+      it 'returns "draw"' do
+        board.board = [%w[X O X], %w[X O O], %w[O X X]]
+        expect(board.game_finish?(game2.current_player, input)).to eq('draw')
 
-    it 'returns "winner" if there is a diagonal match
-        if and only if user input (down diagonal -> A1,B2,C3)' do
-      board.board = [%w[X y y], %w[y X _], %w[_ _ X]]
-      expect(board.game_finish?(game.current_player, input)).to eq('winner')
-    end
-
-    it 'returns "winner" if there is a diagonal match
-    if and only if user input (up diagonal -> C1,A3)' do
-      input = 'C1'
-      board.board = [%w[_ _ O], %w[_ O _], %w[O _ x]]
-      expect(board.game_finish?(game2.current_player, input)).to eq('winner')
-    end
-
-    it 'returns "draw" if all cells are occupied without a winner' do
-      board.board = [%w[X O X], %w[X O O], %w[O X X]]
-      expect(board.game_finish?(game2.current_player, input)).to eq('draw')
+        board.board = [%w[X O X], %w[_ O O], %w[O _ X]]
+        expect(board.game_finish?(game2.current_player, input)).to_not eq('draw')
+      end
     end
   end
 end

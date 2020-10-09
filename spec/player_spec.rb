@@ -1,7 +1,6 @@
 require_relative '../lib/player.rb'
 
 RSpec.describe Player do
-  # let(:player) { Player.new()}
   subject { Player.new }
 
   describe '#valid_name?' do
