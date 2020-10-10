@@ -9,7 +9,8 @@
 
 [live view](https://repl.it/@karmaester/Tic-Tac-Toe#main.rb)
 
-
+## screenshoot
+![screenshot](Scr.png)
 ## Getting Started
 
 You should have Ruby installed to run this.
@@ -18,7 +19,7 @@ You should have Ruby installed to run this.
 
 From local machine:
 
-Run the programm from your command line typing 'main' and pressing 'enter' from inside the programm folder.
+Run the program from your command line typing 'main' and pressing 'enter' from inside the program folder.
 
 From Live Demo:
 
@@ -32,7 +33,7 @@ Click on the Live Demo link below, once there click on 'Run' and the game will s
 
 3)Write a letter from A to C and a number from 1 to 3 to select the row and the column respectively that you want to play on.
 
-4)If your input isn't correct, you will be asked to reenter it.
+4)If your input isn't correct, you will be asked to re-enter it.
 
 5)Player 1 is X, player 2 is O.
 
@@ -44,7 +45,14 @@ Click on the Live Demo link below, once there click on 'Run' and the game will s
 
 9)If all 9 squares are full, the game is over.
 
-10)If you want to terminate the programm, press 'control' + 'c'.
+10)If you want to terminate the program, press 'control' + 'c'.
+
+
+## Testing Instructions
+
+- For testing Run 'rspec' in the terminal from inside the program folder.
+
+
 
 ## Authors
 

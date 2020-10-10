@@ -1,5 +1,5 @@
 class Board
-  attr_reader :board
+  attr_accessor :board
 
   def initialize
     first_row = %w[_ _ _]
@@ -26,6 +26,23 @@ class Board
     end
   end
 
+  def modify(current_player, input)
+    letter = round(current_player)
+
+    mapping_array = mapping(input)
+
+    @board[mapping_array[0]][mapping_array[1]] = letter
+  end
+
+  def game_finish?(current_player, input)
+    return 'winner' if winner?(current_player, input)
+    return 'draw' if draw?
+
+    false
+  end
+
+  private
+
   def wrong_input?(input)
     mapping(input).nil?
   end
@@ -36,12 +53,12 @@ class Board
     @board[mapping_array[0]][ mapping_array[1] ] != '_'
   end
 
-  def modify(current_player, input)
-    letter = round(current_player)
-
-    mapping_array = mapping(input)
-
-    @board[mapping_array[0]][mapping_array[1]] = letter
+  def mapping(move)
+    move = move.to_sym
+    board_hash = { A1: [0, 0], A2: [0, 1], A3: [0, 2],
+                   B1: [1, 0], B2: [1, 1], B3: [1, 2],
+                   C1: [2, 0], C2: [2, 1], C3: [2, 2] }
+    board_hash[move]
   end
 
   def round(current_player_local)
@@ -52,21 +69,6 @@ class Board
                'O'
              end
     letter
-  end
-
-  def mapping(move)
-    move = move.to_sym
-    board_hash = { A1: [0, 0], A2: [0, 1], A3: [0, 2],
-                   B1: [1, 0], B2: [1, 1], B3: [1, 2],
-                   C1: [2, 0], C2: [2, 1], C3: [2, 2] }
-    board_hash[move]
-  end
-
-  def game_finish?(current_player, input)
-    return 'winner' if winner?(current_player, input)
-    return 'draw' if draw?
-
-    false
   end
 
   def draw?
